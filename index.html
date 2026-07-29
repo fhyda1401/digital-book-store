@@ -11,29 +11,37 @@
             box.classList.toggle('hidden');
         }
 
-        function openCryptoPage(currency, address, bookName, price, bookFile) {
+        function openBookPage(currency, address, bookName, price, bookContent) {
             const newWindow = window.open('', '_blank');
             newWindow.document.write(`
                 <html lang="ar" dir="rtl">
                 <head>
-                    <title>الدفع بواسطة ${currency}</title>
+                    <title>شراء وقراءة ${bookName}</title>
                     <script src="https://cdn.tailwindcss.com"><\/script>
                 </head>
-                <body class="bg-gray-100 flex items-center justify-center h-screen p-4">
-                    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full text-center space-y-4">
-                        <h2 class="text-2xl font-bold text-gray-800">إتمام شراء: ${bookName}</h2>
-                        <p class="text-gray-600">المبلغ المطلوب: <span class="text-green-600 font-bold">${price}</span></p>
-                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl text-right">
+                <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-2xl w-full text-right space-y-4">
+                        <h2 class="text-2xl font-bold text-gray-800 text-center">إتمام شراء وقراءة: ${bookName}</h2>
+                        <p class="text-gray-600 text-center">المبلغ المطلوب: <span class="text-green-600 font-bold">${price}</span></p>
+                        
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
                             <span class="block text-sm font-semibold text-blue-800 mb-1">أرسل المبلغ حصراً عبر عملة (${currency}) إلى العنوان التالي:</span>
                             <code class="block bg-white p-3 rounded border border-blue-300 select-all text-sm font-mono text-gray-800 break-all text-center">${address}</code>
                         </div>
-                        <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-xl text-xs text-yellow-800">
-                            ملاحظة: بعد إتمام التحويل، يمكنك تحميل نسختك فوراً عبر الرابط أدناه بعد التأكيد:
+
+                        <div class="bg-gray-50 border border-gray-200 p-4 rounded-xl max-h-60 overflow-y-auto">
+                            <h3 class="font-bold text-gray-800 mb-2">محتوى الكتاب (معاينة وقراءة فورية):</h3>
+                            <p class="text-sm text-gray-700 whitespace-pre-line leading-relaxed">${bookContent}</p>
                         </div>
-                        <a href="books/${bookFile}" download class="block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-medium transition">
-                            📥 تحميل الكتاب (PDF)
-                        </a>
-                        <button onclick="window.close()" class="mt-2 bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-black transition text-sm">إغلاق الصفحة</button>
+
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="window.print()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-medium transition text-sm">
+                                🖨️ طباعة أو حفظ كملف PDF
+                            </button>
+                            <button onclick="window.close()" class="bg-gray-800 text-white px-6 py-2.5 rounded-lg hover:bg-black transition text-sm">
+                                إغلاق
+                            </button>
+                        </div>
                     </div>
                 </body>
                 </html>
@@ -68,16 +76,16 @@
                     </button>
                     
                     <div id="crypto-js" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت.\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.\n- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).\n\nالفصل الثاني: التحكم في التدفق\n- الجمل الشرطية: استخدام if و else لاتخاذ القرارات.\n- الحلقات التكرارية: استخدام for و while لتكرار العمليات.\n\nالفصل الثالث: الدوال والتفاعل مع الصفحة (DOM)\n- كتابة الدوال واستدعائها لتنظيم الكود.\n- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها.\n\nالفصل الرابع: مشروع عملي (تطبيق قائمة المهام To-Do List)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت.\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.\n- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).\n\nالفصل الثاني: التحكم في التدفق\n- الجمل الشرطية: استخدام if و else لاتخاذ القرارات.\n- الحلقات التكرارية: استخدام for و while لتكرار العمليات.\n\nالفصل الثالث: الدوال والتفاعل مع الصفحة (DOM)\n- كتابة الدوال واستدعائها لتنظيم الكود.\n- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها.\n\nالفصل الرابع: مشروع عملي (تطبيق قائمة المهام To-Do List)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت.\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.\n- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).\n\nالفصل الثاني: التحكم في التدفق\n- الجمل الشرطية: استخدام if و else لاتخاذ القرارات.\n- الحلقات التكرارية: استخدام for و while لتكرار العمليات.\n\nالفصل الثالث: الدوال والتفاعل مع الصفحة (DOM)\n- كتابة الدوال واستدعائها لتنظيم الكود.\n- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها.\n\nالفصل الرابع: مشروع عملي (تطبيق قائمة المهام To-Do List)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت.\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.\n- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).\n\nالفصل الثاني: التحكم في التدفق\n- الجمل الشرطية: استخدام if و else لاتخاذ القرارات.\n- الحلقات التكرارية: استخدام for و while لتكرار العمليات.\n\nالفصل الثالث: الدوال والتفاعل مع الصفحة (DOM)\n- كتابة الدوال واستدعائها لتنظيم الكود.\n- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها.\n\nالفصل الرابع: مشروع عملي (تطبيق قائمة المهام To-Do List)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -104,16 +112,16 @@
                     </button>
                     
                     <div id="crypto-ai" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بدقة.\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟\nفهم طريقة معالجة النصوص وتوقع الكلمات التالية.\n\nالفصل الثاني: الهيكل الاحترافي لكتابة الأوامر\n1. الدور (Role): أخبر النموذج من هو.\n2. السياق (Context): اشرح المشكلة.\n3. المهمة (Task): حدد ما تريده بدقة.\n4. شكل المخرجات (Output Format): جدول أو نقاط.\n\nالفصل الثالث: تقنيات متقدمة\n- التفكير خطوة بخطوة (Chain of Thought).\n- إعطاء أمثلة توضيحية (Few-Shot Prompting).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بدقة.\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟\nفهم طريقة معالجة النصوص وتوقع الكلمات التالية.\n\nالفصل الثاني: الهيكل الاحترافي لكتابة الأوامر\n1. الدور (Role): أخبر النموذج من هو.\n2. السياق (Context): اشرح المشكلة.\n3. المهمة (Task): حدد ما تريده بدقة.\n4. شكل المخرجات (Output Format): جدول أو نقاط.\n\nالفصل الثالث: تقنيات متقدمة\n- التفكير خطوة بخطوة (Chain of Thought).\n- إعطاء أمثلة توضيحية (Few-Shot Prompting).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بدقة.\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟\nفهم طريقة معالجة النصوص وتوقع الكلمات التالية.\n\nالفصل الثاني: الهيكل الاحترافي لكتابة الأوامر\n1. الدور (Role): أخبر النموذج من هو.\n2. السياق (Context): اشرح المشكلة.\n3. المهمة (Task): حدد ما تريده بدقة.\n4. شكل المخرجات (Output Format): جدول أو نقاط.\n\nالفصل الثالث: تقنيات متقدمة\n- التفكير خطوة بخطوة (Chain of Thought).\n- إعطاء أمثلة توضيحية (Few-Shot Prompting).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بدقة.\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟\nفهم طريقة معالجة النصوص وتوقع الكلمات التالية.\n\nالفصل الثاني: الهيكل الاحترافي لكتابة الأوامر\n1. الدور (Role): أخبر النموذج من هو.\n2. السياق (Context): اشرح المشكلة.\n3. المهمة (Task): حدد ما تريده بدقة.\n4. شكل المخرجات (Output Format): جدول أو نقاط.\n\nالفصل الثالث: تقنيات متقدمة\n- التفكير خطوة بخطوة (Chain of Thought).\n- إعطاء أمثلة توضيحية (Few-Shot Prompting).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -140,16 +148,16 @@
                     </button>
                     
                     <div id="crypto-ecommerce" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية بالمنتجات الرقمية هي أسرع طريقة لبناء مصدر دخل عبر الإنترنت برأس مال بسيط.\n\nالفصل الأول: اختيار النطاق المربح (Niche)\nكيف تجد المجال الذي تملك خبرة فيه وتدرس الجمهور.\n\nالفصل الثاني: بناء المتجر الرقمي\nاستخدام GitHub و Cloudflare لبناء متجر سريع ومجاني.\n\nالفصل الثالث: استراتيجيات التسويق\n- التسويق بالمحتوى وصناعة القيمة.\n- التسويق عبر البريد الإلكتروني (Email Marketing).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية بالمنتجات الرقمية هي أسرع طريقة لبناء مصدر دخل عبر الإنترنت برأس مال بسيط.\n\nالفصل الأول: اختيار النطاق المربح (Niche)\nكيف تجد المجال الذي تملك خبرة فيه وتدرس الجمهور.\n\nالفصل الثاني: بناء المتجر الرقمي\nاستخدام GitHub و Cloudflare لبناء متجر سريع ومجاني.\n\nالفصل الثالث: استراتيجيات التسويق\n- التسويق بالمحتوى وصناعة القيمة.\n- التسويق عبر البريد الإلكتروني (Email Marketing).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية بالمنتجات الرقمية هي أسرع طريقة لبناء مصدر دخل عبر الإنترنت برأس مال بسيط.\n\nالفصل الأول: اختيار النطاق المربح (Niche)\nكيف تجد المجال الذي تملك خبرة فيه وتدرس الجمهور.\n\nالفصل الثاني: بناء المتجر الرقمي\nاستخدام GitHub و Cloudflare لبناء متجر سريع ومجاني.\n\nالفصل الثالث: استراتيجيات التسويق\n- التسويق بالمحتوى وصناعة القيمة.\n- التسويق عبر البريد الإلكتروني (Email Marketing).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openBookPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية بالمنتجات الرقمية هي أسرع طريقة لبناء مصدر دخل عبر الإنترنت برأس مال بسيط.\n\nالفصل الأول: اختيار النطاق المربح (Niche)\nكيف تجد المجال الذي تملك خبرة فيه وتدرس الجمهور.\n\nالفصل الثاني: بناء المتجر الرقمي\nاستخدام GitHub و Cloudflare لبناء متجر سريع ومجاني.\n\nالفصل الثالث: استراتيجيات التسويق\n- التسويق بالمحتوى وصناعة القيمة.\n- التسويق عبر البريد الإلكتروني (Email Marketing).')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
