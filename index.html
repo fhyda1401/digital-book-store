@@ -11,7 +11,7 @@
             box.classList.toggle('hidden');
         }
 
-        function openCryptoPage(currency, address, bookName, price) {
+        function openCryptoPage(currency, address, bookName, price, bookFile) {
             const newWindow = window.open('', '_blank');
             newWindow.document.write(`
                 <html lang="ar" dir="rtl">
@@ -19,16 +19,21 @@
                     <title>الدفع بواسطة ${currency}</title>
                     <script src="https://cdn.tailwindcss.com"><\/script>
                 </head>
-                <body class="bg-gray-100 flex items-center justify-center h-m h-screen p-4">
+                <body class="bg-gray-100 flex items-center justify-center h-screen p-4">
                     <div class="bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full text-center space-y-4">
                         <h2 class="text-2xl font-bold text-gray-800">إتمام شراء: ${bookName}</h2>
                         <p class="text-gray-600">المبلغ المطلوب: <span class="text-green-600 font-bold">${price}</span></p>
-                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl">
+                        <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl text-right">
                             <span class="block text-sm font-semibold text-blue-800 mb-1">أرسل المبلغ حصراً عبر عملة (${currency}) إلى العنوان التالي:</span>
-                            <code class="block bg-white p-3 rounded border border-blue-300 select-all text-sm font-mono text-gray-800 break-all">${address}</code>
+                            <code class="block bg-white p-3 rounded border border-blue-300 select-all text-sm font-mono text-gray-800 break-all text-center">${address}</code>
                         </div>
-                        <p class="text-xs text-red-500">ملاحظة: بعد إتمام التحويل، يرجى إرسال إيصال الدفع لتحميل الكتاب.</p>
-                        <button onclick="window.close()" class="mt-4 bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-black transition">إغلاق الصفحة</button>
+                        <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-xl text-xs text-yellow-800">
+                            ملاحظة: بعد إتمام التحويل، يمكنك تحميل نسختك فوراً عبر الرابط أدناه بعد التأكيد:
+                        </div>
+                        <a href="books/${bookFile}" download class="block bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg font-medium transition">
+                            📥 تحميل الكتاب (PDF)
+                        </a>
+                        <button onclick="window.close()" class="mt-2 bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-black transition text-sm">إغلاق الصفحة</button>
                     </div>
                 </body>
                 </html>
@@ -52,30 +57,27 @@
                 <span class="text-green-600 font-bold text-xl block mb-4">$15.00</span>
             </div>
             <div class="space-y-3">
-                <!-- زر PayPal -->
                 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=fhyda488@gmail.com&item_name=JavaScript+Book&amount=15.00&currency_code=USD" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 rounded-lg font-medium transition duration-200">
                     💳 شراء عبر PayPal
                 </a>
                 
-                <!-- زر تفاعلي للعملات الرقمية -->
                 <div>
                     <button onclick="toggleCrypto('crypto-js')" class="w-full bg-gray-900 hover:bg-black text-white text-center py-2.5 rounded-lg font-medium transition duration-200 flex items-center justify-center gap-2">
                         <span>🪙 الدفع بالعملات الرقمية</span>
                         <span class="text-xs">▼</span>
                     </button>
                     
-                    <!-- القائمة المنسدلة للعملات -->
                     <div id="crypto-js" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00', 'javascript-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -91,30 +93,27 @@
                 <span class="text-green-600 font-bold text-xl block mb-4">$10.00</span>
             </div>
             <div class="space-y-3">
-                <!-- زر PayPal -->
                 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=fhyda488@gmail.com&item_name=Prompt+Engineering+Book&amount=10.00&currency_code=USD" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 rounded-lg font-medium transition duration-200">
                     💳 شراء عبر PayPal
                 </a>
                 
-                <!-- زر تفاعلي للعملات الرقمية -->
                 <div>
                     <button onclick="toggleCrypto('crypto-ai')" class="w-full bg-gray-900 hover:bg-black text-white text-center py-2.5 rounded-lg font-medium transition duration-200 flex items-center justify-center gap-2">
                         <span>🪙 الدفع بالعملات الرقمية</span>
                         <span class="text-xs">▼</span>
                     </button>
                     
-                    <!-- القائمة المنسدلة للعملات -->
                     <div id="crypto-ai" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'prompt-engineering-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -130,30 +129,27 @@
                 <span class="text-green-600 font-bold text-xl block mb-4">$20.00</span>
             </div>
             <div class="space-y-3">
-                <!-- زر PayPal -->
                 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=fhyda488@gmail.com&item_name=Ecommerce+Book&amount=20.00&currency_code=USD" target="_blank" class="block bg-blue-600 hover:bg-blue-700 text-white text-center py-2.5 rounded-lg font-medium transition duration-200">
                     💳 شراء عبر PayPal
                 </a>
                 
-                <!-- زر تفاعلي للعملات الرقمية -->
                 <div>
                     <button onclick="toggleCrypto('crypto-ecommerce')" class="w-full bg-gray-900 hover:bg-black text-white text-center py-2.5 rounded-lg font-medium transition duration-200 flex items-center justify-center gap-2">
                         <span>🪙 الدفع بالعملات الرقمية</span>
                         <span class="text-xs">▼</span>
                     </button>
                     
-                    <!-- القائمة المنسدلة للعملات -->
                     <div id="crypto-ecommerce" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPage('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00', 'ecommerce-book.pdf')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
