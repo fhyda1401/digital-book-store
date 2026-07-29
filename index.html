@@ -20,7 +20,7 @@
                     <script src="https://cdn.tailwindcss.com"><\/script>
                 </head>
                 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
-                    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full text-right space-y-4">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-2xl w-full text-right space-y-4">
                         <h2 class="text-2xl font-bold text-gray-800 text-center">شراء ${bookName}</h2>
                         <p class="text-gray-600 text-center">المبلغ المطلوب: <span class="text-green-600 font-bold">${price}</span></p>
                         
@@ -37,14 +37,14 @@
                             <label class="block text-sm font-medium text-gray-700">أدخل كود فتح الكتاب (بعد الدفع):</label>
                             <input type="password" id="access-code" placeholder="أدخل الكود هنا..." class="w-full p-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <button onclick="unlockBook()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium transition text-sm">
-                                فتح وعرض الكتاب
+                                فتح وعرض الكتاب كاملًا
                             </button>
                         </div>
 
-                        <div id="secured-book-content" class="hidden bg-gray-50 border border-gray-200 p-4 rounded-xl max-h-60 overflow-y-auto mt-4">
-                            <h3 class="font-bold text-green-700 mb-2">تم التحقق من الدفع بنجاح! محتوى الكتاب:</h3>
-                            <p class="text-sm text-gray-700 whitespace-pre-line leading-relaxed">${bookContent}</p>
-                            <button onclick="window.print()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg text-xs font-medium">
+                        <div id="secured-book-content" class="hidden bg-gray-50 border border-gray-200 p-4 rounded-xl max-h-96 overflow-y-auto mt-4 space-y-3">
+                            <h3 class="font-bold text-green-700 text-lg">تم التحقق من الدفع بنجاح! محتوى الكتاب كاملًا:</h3>
+                            <div class="text-sm text-gray-700 whitespace-pre-line leading-relaxed border-t pt-3">${bookContent}</div>
+                            <button onclick="window.print()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2.5 rounded-lg text-sm font-medium">
                                 🖨️ طباعة أو حفظ كملف PDF
                             </button>
                         </div>
@@ -57,7 +57,6 @@
                     <script>
                         function unlockBook() {
                             const code = document.getElementById('access-code').value.trim();
-                            // كود الأمان الافتراضي لكل كتاب (يمكنك تغييره متى شئت)
                             if(code === "BOOK123") {
                                 document.getElementById('secured-book-content').classList.remove('hidden');
                                 alert("تم فتح الكتاب بنجاح!");
@@ -99,16 +98,96 @@
                     </button>
                     
                     <div id="crypto-js" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث...\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const.\n- أنواع البيانات: Strings, Numbers, Booleans.')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', `دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف
+
+مقدمة:
+لغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت. من خلال هذا الكتاب، ستتعلم كيف تحول من مبتدئ إلى مطور قادر على بناء تطبيقات ويب تفاعلية.
+
+الفصل الأول: أساسيات اللغة
+- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.
+- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).
+- العمليات الحسابية والمنطقية الأساسية.
+
+الفصل الثاني: التحكم في التدفق
+- الجمل الشرطية: استخدام if, else if, و switch لاتخاذ القرارات داخل الكود.
+- الحلقات التكرارية: استخدام for و while لتكرار العمليات البرمجية بذكاء.
+
+الفصل الثالث: الدوال (Functions) والتفاعل مع الصفحة (DOM)
+- كتابة الدوال واستدعائها لتنظيم الكود وتجنب التكرار.
+- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها أو ألوانها باستخدام JavaScript.
+- الاستماع للأحداث: إضافة تفاعل عند النقر (Click) أو تمرير الماوس.
+
+الفصل الرابع: مشروع عملي - تطبيق قائمة المهام (To-Do List)
+في هذا الفصل سنقوم ببناء تطبيق كامل يتيح للمستخدم إضافة مهام جديدة، حذفها، وحفظها في ذاكرة المتصفح (LocalStorage).`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث...\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const.\n- أنواع البيانات: Strings, Numbers, Booleans.')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', `دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف
+
+مقدمة:
+لغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت. من خلال هذا الكتاب، ستتعلم كيف تحول من مبتدئ إلى مطور قادر على بناء تطبيقات ويب تفاعلية.
+
+الفصل الأول: أساسيات اللغة
+- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.
+- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).
+- العمليات الحسابية والمنطقية الأساسية.
+
+الفصل الثاني: التحكم في التدفق
+- الجمل الشرطية: استخدام if, else if, و switch لاتخاذ القرارات داخل الكود.
+- الحلقات التكرارية: استخدام for و while لتكرار العمليات البرمجية بذكاء.
+
+الفصل الثالث: الدوال (Functions) والتفاعل مع الصفحة (DOM)
+- كتابة الدوال واستدعائها لتنظيم الكود وتجنب التكرار.
+- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها أو ألوانها باستخدام JavaScript.
+- الاستماع للأحداث: إضافة تفاعل عند النقر (Click) أو تمرير الماوس.
+
+الفصل الرابع: مشروع عملي - تطبيق قائمة المهام (To-Do List)
+في هذا الفصل سنقوم ببناء تطبيق كامل يتيح للمستخدم إضافة مهام جديدة، حذفها، وحفظها في ذاكرة المتصفح (LocalStorage).`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث...\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const.\n- أنواع البيانات: Strings, Numbers, Booleans.')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'دليلك الشامل لـ JavaScript', '$15.00', `دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف
+
+مقدمة:
+لغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت. من خلال هذا الكتاب، ستتعلم كيف تحول من مبتدئ إلى مطور قادر على بناء تطبيقات ويب تفاعلية.
+
+الفصل الأول: أساسيات اللغة
+- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.
+- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).
+- العمليات الحسابية والمنطقية الأساسية.
+
+الفصل الثاني: التحكم في التدفق
+- الجمل الشرطية: استخدام if, else if, و switch لاتخاذ القرارات داخل الكود.
+- الحلقات التكرارية: استخدام for و while لتكرار العمليات البرمجية بذكاء.
+
+الفصل الثالث: الدوال (Functions) والتفاعل مع الصفحة (DOM)
+- كتابة الدوال واستدعائها لتنظيم الكود وتجنب التكرار.
+- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها أو ألوانها باستخدام JavaScript.
+- الاستماع للأحداث: إضافة تفاعل عند النقر (Click) أو تمرير الماوس.
+
+الفصل الرابع: مشروع عملي - تطبيق قائمة المهام (To-Do List)
+في هذا الفصل سنقوم ببناء تطبيق كامل يتيح للمستخدم إضافة مهام جديدة، حذفها، وحفظها في ذاكرة المتصفح (LocalStorage).`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00', 'دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف\n\nمقدمة:\nلغة JavaScript هي عصب الويب الحديث...\n\nالفصل الأول: أساسيات اللغة\n- المتغيرات وثوابت البيانات: استخدام let و const.\n- أنواع البيانات: Strings, Numbers, Booleans.')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'دليلك الشامل لـ JavaScript', '$15.00', `دليلك الشامل لـ JavaScript: تعلم البرمجة من الصفر حتى الاحتراف
+
+مقدمة:
+لغة JavaScript هي عصب الويب الحديث، وهي المسؤولة عن إضافة التفاعل والحيوية لصفحات الإنترنت. من خلال هذا الكتاب، ستتعلم كيف تحول من مبتدئ إلى مطور قادر على بناء تطبيقات ويب تفاعلية.
+
+الفصل الأول: أساسيات اللغة
+- المتغيرات وثوابت البيانات: استخدام let و const لتخزين البيانات.
+- أنواع البيانات: النصوص (Strings)، الأرقام (Numbers)، والقيم المنطقية (Booleans).
+- العمليات الحسابية والمنطقية الأساسية.
+
+الفصل الثاني: التحكم في التدفق
+- الجمل الشرطية: استخدام if, else if, و switch لاتخاذ القرارات داخل الكود.
+- الحلقات التكرارية: استخدام for و while لتكرار العمليات البرمجية بذكاء.
+
+الفصل الثالث: الدوال (Functions) والتفاعل مع الصفحة (DOM)
+- كتابة الدوال واستدعائها لتنظيم الكود وتجنب التكرار.
+- التعامل مع الـ DOM: كيف تستهدف عناصر HTML وتغير محتواها أو ألوانها باستخدام JavaScript.
+- الاستماع للأحداث: إضافة تفاعل عند النقر (Click) أو تمرير الماوس.
+
+الفصل الرابع: مشروع عملي - تطبيق قائمة المهام (To-Do List)
+في هذا الفصل سنقوم ببناء تطبيق كامل يتيح للمستخدم إضافة مهام جديدة، حذفها، وحفظها في ذاكرة المتصفح (LocalStorage).`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -135,16 +214,92 @@
                     </button>
                     
                     <div id="crypto-ai" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي أداة عظيمة...\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', `هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي
+
+مقدمة:
+الذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بالضبط. سر النجاح في الحصول على نتائج مذهلة يكمن في كيفية صياغة الأسئلة والأوامر.
+
+الفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟
+فهم طريقة معالجة النصوص وتوقع الكلمات التالية، وكيف يؤثر السياق والوضوح بشكل مباشر على دقة الإجابة.
+
+الفصل الثاني: الهيكل الاحترافي لكتابة الأوامر
+1. الدور (Role): أخبر النموذج من هو (مثلاً: أنت مسوق رقمي خبير).
+2. السياق (Context): اشرح له المشكلة أو الخلفية.
+3. المهمة (Task): حدد بدقة ما تريده أن يفعله.
+4. شكل المخرجات (Output Format): هل تريد الإجابة في نقاط، جدول، أو مقال؟
+
+الفصل الثالث: تقنيات متقدمة
+- التفكير خطوة بخطوة (Chain of Thought): اطلب من النموذج شرح خطوات تفكيره.
+- إعطاء أمثلة توضيحية (Few-Shot Prompting): تزويد النموذج بأمثلة لما تريده.
+
+الفصل الرابع: تطبيقات عملية في الحياة والعمل
+استخدام الأوامر في صياغة الإيميلات الرسمية، تلخيص الكتب والمقالات، وتوليد أفكار تسويقية مبتكرة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي أداة عظيمة...\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', `هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي
+
+مقدمة:
+الذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بالضبط. سر النجاح في الحصول على نتائج مذهلة يكمن في كيفية صياغة الأسئلة والأوامر.
+
+الفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟
+فهم طريقة معالجة النصوص وتوقع الكلمات التالية، وكيف يؤثر السياق والوضوح بشكل مباشر على دقة الإجابة.
+
+الفصل الثاني: الهيكل الاحترافي لكتابة الأوامر
+1. الدور (Role): أخبر النموذج من هو (مثلاً: أنت مسوق رقمي خبير).
+2. السياق (Context): اشرح له المشكلة أو الخلفية.
+3. المهمة (Task): حدد بدقة ما تريده أن يفعله.
+4. شكل المخرجات (Output Format): هل تريد الإجابة في نقاط، جدول، أو مقال؟
+
+الفصل الثالث: تقنيات متقدمة
+- التفكير خطوة بخطوة (Chain of Thought): اطلب من النموذج شرح خطوات تفكيره.
+- إعطاء أمثلة توضيحية (Few-Shot Prompting): تزويد النموذج بأمثلة لما تريده.
+
+الفصل الرابع: تطبيقات عملية في الحياة والعمل
+استخدام الأوامر في صياغة الإيميلات الرسمية، تلخيص الكتب والمقالات، وتوليد أفكار تسويقية مبتكرة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي أداة عظيمة...\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'هندسة الأوامر (Prompt Engineering)', '$10.00', `هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي
+
+مقدمة:
+الذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بالضبط. سر النجاح في الحصول على نتائج مذهلة يكمن في كيفية صياغة الأسئلة والأوامر.
+
+الفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟
+فهم طريقة معالجة النصوص وتوقع الكلمات التالية، وكيف يؤثر السياق والوضوح بشكل مباشر على دقة الإجابة.
+
+الفصل الثاني: الهيكل الاحترافي لكتابة الأوامر
+1. الدور (Role): أخبر النموذج من هو (مثلاً: أنت مسوق رقمي خبير).
+2. السياق (Context): اشرح له المشكلة أو الخلفية.
+3. المهمة (Task): حدد بدقة ما تريده أن يفعله.
+4. شكل المخرجات (Output Format): هل تريد الإجابة في نقاط، جدول، أو مقال؟
+
+الفصل الثالث: تقنيات متقدمة
+- التفكير خطوة بخطوة (Chain of Thought): اطلب من النموذج شرح خطوات تفكيره.
+- إعطاء أمثلة توضيحية (Few-Shot Prompting): تزويد النموذج بأمثلة لما تريده.
+
+الفصل الرابع: تطبيقات عملية في الحياة والعمل
+استخدام الأوامر في صياغة الإيميلات الرسمية، تلخيص الكتب والمقالات، وتوليد أفكار تسويقية مبتكرة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00', 'هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي\n\nمقدمة:\nالذكاء الاصطناعي أداة عظيمة...\n\nالفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'هندسة الأوامر (Prompt Engineering)', '$10.00', `هندسة الأوامر (Prompt Engineering): اتقن التعامل مع الذكاء الاصطناعي
+
+مقدمة:
+الذكاء الاصطناعي ليس سحراً، بل هو أداة عظيمة تفهم ما تطلبه منها بالضبط. سر النجاح في الحصول على نتائج مذهلة يكمن في كيفية صياغة الأسئلة والأوامر.
+
+الفصل الأول: كيف تفكر النماذج اللغوية الكبيرة؟
+فهم طريقة معالجة النصوص وتوقع الكلمات التالية، وكيف يؤثر السياق والوضوح بشكل مباشر على دقة الإجابة.
+
+الفصل الثاني: الهيكل الاحترافي لكتابة الأوامر
+1. الدور (Role): أخبر النموذج من هو (مثلاً: أنت مسوق رقمي خبير).
+2. السياق (Context): اشرح له المشكلة أو الخلفية.
+3. المهمة (Task): حدد بدقة ما تريده أن يفعله.
+4. شكل المخرجات (Output Format): هل تريد الإجابة في نقاط، جدول، أو مقال؟
+
+الفصل الثالث: تقنيات متقدمة
+- التفكير خطوة بخطوة (Chain of Thought): اطلب من النموذج شرح خطوات تفكيره.
+- إعطاء أمثلة توضيحية (Few-Shot Prompting): تزويد النموذج بأمثلة لما تريده.
+
+الفصل الرابع: تطبيقات عملية في الحياة والعمل
+استخدام الأوامر في صياغة الإيميلات الرسمية، تلخيص الكتب والمقالات، وتوليد أفكار تسويقية مبتكرة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
@@ -171,16 +326,80 @@
                     </button>
                     
                     <div id="crypto-ecommerce" class="hidden mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200 space-y-2 text-xs">
-                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية الرقمية هي أسرع طريقة...\n\nالفصل الأول: اختيار النطاق المربح (Niche)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('USDT / TRON (TRC20)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', `أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي وتحقيق الدخل
+
+مقدمة:
+التجارة الإلكترونية بالمنتجات الرقمية (الكتب، الدورات، الأدوات) هي أسهل وأسرع طريقة لبناء مصدر دخل عبر الإنترنت لأنها لا تحتاج إلى شحن وتتميز بهامش ربح عالي جداً.
+
+الفصل الأول: اختيار النطاق المربح (Niche)
+كيف تجد المجال الذي تملك شغفاً وخبرة فيه، وكيف تدرس الجمهور المستهدف وتعرف احتياجاته الحقيقية.
+
+الفصل الثاني: بناء المتجر الرقمي
+كيف تبني متجراً مجانياً وسريعاً وربطه بوسائل الدفع المختلفة، وهو الأساس التقني لمشروعك.
+
+الفصل الثالث: استراتيجيات التسويق وجذب العملاء
+- التسويق عبر المحتوى وصناعة قيمة مجانية للجمهور على منصات التواصل.
+- التسويق عبر البريد الإلكتروني وكيف تحول الزائر إلى زبون دائم يشتري منك مراراً وتكراراً.
+
+الفصل الرابع: إدارة وتحسين المتجر
+قياس أداء المتجر، تحليل معدل التحويل، وتقديم خدمة عملاء ممتازة تضمن لك السمعة الطيبة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 USDT / TRON (TRC20)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية الرقمية هي أسرع طريقة...\n\nالفصل الأول: اختيار النطاق المربح (Niche)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Ethereum (ETH)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', `أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي وتحقيق الدخل
+
+مقدمة:
+التجارة الإلكترونية بالمنتجات الرقمية (الكتب، الدورات، الأدوات) هي أسهل وأسرع طريقة لبناء مصدر دخل عبر الإنترنت لأنها لا تحتاج إلى شحن وتتميز بهامش ربح عالي جداً.
+
+الفصل الأول: اختيار النطاق المربح (Niche)
+كيف تجد المجال الذي تملك شغفاً وخبرة فيه، وكيف تدرس الجمهور المستهدف وتعرف احتياجاته الحقيقية.
+
+الفصل الثاني: بناء المتجر الرقمي
+كيف تبني متجراً مجانياً وسريعاً وربطه بوسائل الدفع المختلفة، وهو الأساس التقني لمشروعك.
+
+الفصل الثالث: استراتيجيات التسويق وجذب العملاء
+- التسويق عبر المحتوى وصناعة قيمة مجانية للجمهور على منصات التواصل.
+- التسويق عبر البريد الإلكتروني وكيف تحول الزائر إلى زبون دائم يشتري منك مراراً وتكراراً.
+
+الفصل الرابع: إدارة وتحسين المتجر
+قياس أداء المتجر، تحليل معدل التحويل، وتقديم خدمة عملاء ممتازة تضمن لك السمعة الطيبة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Ethereum (ETH)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية الرقمية هي أسرع طريقة...\n\nالفصل الأول: اختيار النطاق المربح (Niche)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Binance Coin (BNB)', '0x300d89460cf8f299cd248b7e675f4f3e6a59d23b', 'أسرار التجارة الإلكترونية', '$20.00', `أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي وتحقيق الدخل
+
+مقدمة:
+التجارة الإلكترونية بالمنتجات الرقمية (الكتب، الدورات، الأدوات) هي أسهل وأسرع طريقة لبناء مصدر دخل عبر الإنترنت لأنها لا تحتاج إلى شحن وتتميز بهامش ربح عالي جداً.
+
+الفصل الأول: اختيار النطاق المربح (Niche)
+كيف تجد المجال الذي تملك شغفاً وخبرة فيه، وكيف تدرس الجمهور المستهدف وتعرف احتياجاته الحقيقية.
+
+الفصل الثاني: بناء المتجر الرقمي
+كيف تبني متجراً مجانياً وسريعاً وربطه بوسائل الدفع المختلفة، وهو الأساس التقني لمشروعك.
+
+الفصل الثالث: استراتيجيات التسويق وجذب العملاء
+- التسويق عبر المحتوى وصناعة قيمة مجانية للجمهور على منصات التواصل.
+- التسويق عبر البريد الإلكتروني وكيف تحول الزائر إلى زبون دائم يشتري منك مراراً وتكراراً.
+
+الفصل الرابع: إدارة وتحسين المتجر
+قياس أداء المتجر، تحليل معدل التحويل، وتقديم خدمة عملاء ممتازة تضمن لك السمعة الطيبة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Binance Coin (BNB)
                         </button>
-                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00', 'أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي\n\nمقدمة:\nالتجارة الإلكترونية الرقمية هي أسرع طريقة...\n\nالفصل الأول: اختيار النطاق المربح (Niche)')" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
+                        <button onclick="openCryptoPaymentModal('Bitcoin (BTC)', 'bc1qtnfqy38gy9ne064lezyfy2v4l6je9uaphhyv0dTPHgF9e4sZAUxKzZ9szyM23Dyapo2K6cUg', 'أسرار التجارة الإلكترونية', '$20.00', `أسرار التجارة الإلكترونية: دليلك لبناء مشروعك الرقمي وتحقيق الدخل
+
+مقدمة:
+التجارة الإلكترونية بالمنتجات الرقمية (الكتب، الدورات، الأدوات) هي أسهل وأسرع طريقة لبناء مصدر دخل عبر الإنترنت لأنها لا تحتاج إلى شحن وتتميز بهامش ربح عالي جداً.
+
+الفصل الأول: اختيار النطاق المربح (Niche)
+كيف تجد المجال الذي تملك شغفاً وخبرة فيه، وكيف تدرس الجمهور المستهدف وتعرف احتياجاته الحقيقية.
+
+الفصل الثاني: بناء المتجر الرقمي
+كيف تبني متجراً مجانياً وسريعاً وربطه بوسائل الدفع المختلفة، وهو الأساس التقني لمشروعك.
+
+الفصل الثالث: استراتيجيات التسويق وجذب العملاء
+- التسويق عبر المحتوى وصناعة قيمة مجانية للجمهور على منصات التواصل.
+- التسويق عبر البريد الإلكتروني وكيف تحول الزائر إلى زبون دائم يشتري منك مراراً وتكراراً.
+
+الفصل الرابع: إدارة وتحسين المتجر
+قياس أداء المتجر، تحليل معدل التحويل، وتقديم خدمة عملاء ممتازة تضمن لك السمعة الطيبة.`)" class="w-full text-right bg-white hover:bg-gray-100 p-2 rounded border border-gray-200 transition font-medium text-gray-700">
                             🔹 Bitcoin (BTC)
                         </button>
                     </div>
